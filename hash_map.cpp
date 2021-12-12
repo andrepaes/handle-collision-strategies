@@ -2,15 +2,13 @@
 #include <string>
 #include "linked_list.h"
 
-using namespace std;
-
 // functions definitions
 bool insert_item(node* chain_list, unsigned index, string value);
 bool delete_item(node* chain_list, unsigned index, string value);
 bool item_exist(node* chain_list, unsigned index, string value);
 void print(node *chain_list);
 
-unsigned TABLE_SIZE = 1;
+unsigned TABLE_SIZE = 5;
 unsigned M = 31;
 
 // Kernighan and Ritchie's function
@@ -41,6 +39,7 @@ int main()
     print(scatter_table[i].head);
     cout << "\n";
   }
+
   while(true){
     cin.clear();
     fflush(stdin);
@@ -48,11 +47,11 @@ int main()
     position = hash_key(value, value.size());
     cout << position;
 
-  if(item_exist(scatter_table, position, value)){
-     cout << "\nITEM EXIST\n";
-  } else{
-     cout << "\nNAO EXISTE\n";
-  }
+    if(item_exist(scatter_table, position, value)){
+       cout << "\nITEM EXIST\n";
+    } else{
+       cout << "\nNAO EXISTE\n";
+    }
 
     delete_item(scatter_table, position, value);
 
