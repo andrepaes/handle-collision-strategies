@@ -11,19 +11,6 @@ typedef struct scatter_node {
   node *head = NULL;
 } scatter_node;
 
-// insert at first postion to not need to iterate over the whole list
-bool insert_item(scatter_node *scatter_table, unsigned index, string value){
-   node *new_node = (node *) malloc(sizeof(node));
-   if(new_node == NULL){
-      return false;
-   } else {
-      new_node->value = value;
-      new_node->next = scatter_table[index].head;
-      scatter_table[index].head = new_node;
-      return true;
-   }
-}
-
 bool item_exist(scatter_node *scatter_table, unsigned index, string value){
    node *finder = scatter_table[index].head;
    while(finder != NULL) {
@@ -34,6 +21,21 @@ bool item_exist(scatter_node *scatter_table, unsigned index, string value){
    }
 
    return false;
+}
+
+// insert at first postion to not need to iterate over the whole list
+bool insert_item(scatter_node *scatter_table, unsigned index, string value){
+   node *new_node = (node *) malloc(sizeof(node));
+   if(new_node == NULL){
+      return false;
+   } else if(item_exist(scatter_table, index, value)) {
+      return true;
+   } else {
+      new_node->value = value;
+      new_node->next = scatter_table[index].head;
+      scatter_table[index].head = new_node;
+      return true;
+   }
 }
 
 bool delete_item(scatter_node *scatter_table, unsigned index, string value) {
