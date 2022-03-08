@@ -1,13 +1,13 @@
 #include <iostream>
 #include "linked_list.h"
+//#include "bst.h"
 
-// functions definitions
-bool insert_item(node* chain_list, unsigned index, string value);
-bool delete_item(node* chain_list, unsigned index, string value);
-bool item_exist(node* chain_list, unsigned index, string value);
-void print(node *chain_list);
+// functions definition
+bool insert_item(node* scatter_table, unsigned index, string value);
+bool item_exist(node* scatter_table, unsigned index, string value);
+void print(node *node);
 
-unsigned TABLE_SIZE = 5;
+unsigned TABLE_SIZE = 1;
 unsigned M = 31;
 
 // Kernighan and Ritchie's function
@@ -35,31 +35,28 @@ int main()
   }
 
   for(int i = 0; i < TABLE_SIZE; i++){
-    print(scatter_table[i].head);
+    print(scatter_table[i].root);
     cout << "\n";
   }
 
-  while(true){
-    cin.clear();
-    fflush(stdin);
-    cin >> value;
-    position = hash_key(value, value.size());
-    cout << position;
+ while(true){
+   cin.clear();
+   fflush(stdin);
+   cin >> value;
+   position = hash_key(value, value.size());
+   cout << position;
 
-    if(item_exist(scatter_table, position, value)){
-       cout << "\nITEM EXIST\n";
-    } else{
-       cout << "\nNAO EXISTE\n";
-    }
+   if(item_exist(scatter_table, position, value)){
+      cout << "\nITEM EXIST\n";
+   } else{
+      cout << "\nNAO EXISTE\n";
+   }
 
-    delete_item(scatter_table, position, value);
-
-    for(int i = 0; i < TABLE_SIZE; i++){
-      cout << "index: " << i << "\n";
-      print(scatter_table[i].head);
-      cout << "\n";
-    }
-  }
+   for(int i = 0; i < TABLE_SIZE; i++){
+     print(scatter_table[i].root);
+     cout << "\n";
+   }
+ }
 
   return 0;
 }
