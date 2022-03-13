@@ -25,16 +25,15 @@ bool item_exist(scatter_node *scatter_table, unsigned index, string value){
 
 // insert at first postion to not need to iterate over the whole list
 bool insert_item(scatter_node *scatter_table, unsigned index, string value){
-   node *new_node = (node *) malloc(sizeof(node));
-
-   if(new_node == NULL){
-      return false;
-   } 
-
    if(item_exist(scatter_table, index, value)) {
-      free(new_node);
       return true;
    } else {
+      node *new_node = (node *) malloc(sizeof(node));
+
+      if(new_node == NULL){
+         return false;
+      } 
+
       new_node->value = value;
       new_node->next = scatter_table[index].head;
       scatter_table[index].head = new_node;

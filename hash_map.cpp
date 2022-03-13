@@ -1,13 +1,22 @@
 #include <iostream>
-#include "linked_list.h"
+#include <fstream>
+#include <sstream>
+#include <vector>
+//#include "linked_list.h"
 //#include "bst.h"
+#include "avl.h"
+#include <unistd.h>
+#include <cstdlib>
+
+#include <chrono>
+using namespace std::chrono;
 
 // functions definition
 bool insert_item(node* scatter_table, unsigned index, string value);
 bool item_exist(node* scatter_table, unsigned index, string value);
 void print(node *node);
 
-unsigned TABLE_SIZE = 1;
+unsigned TABLE_SIZE = 1000;
 unsigned M = 31;
 
 // Kernighan and Ritchie's function
@@ -21,42 +30,33 @@ unsigned hash_key(string key, unsigned len) {
 // scatter table mean table of references
 int main()
 {
-  string value;
-  unsigned position;
+  string row, word, value;
+  vector<string> row_array;
   scatter_node *scatter_table = (scatter_node *) malloc(sizeof(scatter_node) * TABLE_SIZE);
 
-  while(value.compare("0") != 0) {
-    cin.clear();
-    fflush(stdin);
-    cin >> value;
-    position = hash_key(value, value.size());
-    cout << "\nvalue: " << value << ", index: " << position << "\n";
-    insert_item(scatter_table, position, value);
-  }
+  auto start = high_resolution_clock::now();
 
-  for(int i = 0; i < TABLE_SIZE; i++){
-    print(scatter_table[i].root);
-    cout << "\n";
-  }
+  std::ifstream file("Dubsmash_22m_mail_pass.txt");
 
- while(true){
-   cin.clear();
-   fflush(stdin);
-   cin >> value;
-   position = hash_key(value, value.size());
-   cout << position;
+  if(file.is_open()){
+    while(getline(file, row)){
+      stringstream row_stream(row);
 
-   if(item_exist(scatter_table, position, value)){
-      cout << "\nITEM EXIST\n";
-   } else{
-      cout << "\nNAO EXISTE\n";
-   }
+      getline(row_stream, value, ':');
+      string a = value;
+      insert_item(scatter_table, hash_key(a, a.length()), a);
+      cout << a << endl;
+    }
+  } else 
+    cout << "Couldn't open file";
 
-   for(int i = 0; i < TABLE_SIZE; i++){
-     print(scatter_table[i].root);
-     cout << "\n";
-   }
- }
+  auto stop = high_resolution_clock::now();
 
+  auto duration = duration_cast<microseconds>(stop - start);
+
+  cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+  cout << duration.count() << endl;
+
+  print(scatter_table[0].root);
   return 0;
 }
