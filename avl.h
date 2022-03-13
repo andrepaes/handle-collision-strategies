@@ -93,6 +93,7 @@ node *do_insert_item(node* actual_node, node* new_node) {
   } else if (value.compare(actual_node->value) > 0) {
     actual_node->right = do_insert_item(actual_node->right, new_node);
   } else {
+    free(new_node);
     return actual_node;
   }
 
@@ -154,7 +155,7 @@ bool item_exist(scatter_node *scatter_table, unsigned index, string value){
 }
 
 bool insert_item(scatter_node *scatter_table, unsigned index, string value) {
-  node *new_node = (node *) malloc(sizeof(node));
+  node *new_node = (node *) malloc(10 * sizeof(node));
   new_node->value = value;
 
   if(new_node == NULL){

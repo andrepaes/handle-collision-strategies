@@ -2,9 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-#include "linked_list.h"
+//include "linked_list.h"
 //#include "bst.h"
-//#include "avl.h"
+#include "avl.h"
 #include <unistd.h>
 #include <cstdlib>
 
