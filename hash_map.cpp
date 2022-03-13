@@ -2,9 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-//#include "linked_list.h"
+#include "linked_list.h"
 //#include "bst.h"
-#include "avl.h"
+//#include "avl.h"
 #include <unistd.h>
 #include <cstdlib>
 
@@ -32,6 +32,7 @@ int main()
 {
   string row, word, value;
   vector<string> row_array;
+  unsigned i = 0;
   scatter_node *scatter_table = (scatter_node *) malloc(sizeof(scatter_node) * TABLE_SIZE);
 
   auto start = high_resolution_clock::now();
@@ -45,7 +46,8 @@ int main()
       getline(row_stream, value, ':');
       string a = value;
       insert_item(scatter_table, hash_key(a, a.length()), a);
-      cout << a << endl;
+      i++;
+      cout << i << endl;
     }
   } else 
     cout << "Couldn't open file";
@@ -54,9 +56,8 @@ int main()
 
   auto duration = duration_cast<microseconds>(stop - start);
 
-  cout << "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
-  cout << duration.count() << endl;
+  cout << "----------------------------------------------------------------------------";
+  cout << duration.count()/1000 << endl;
 
-  print(scatter_table[0].root);
   return 0;
 }

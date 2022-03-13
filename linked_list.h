@@ -1,4 +1,5 @@
 #include <string>
+#include <math.h>
 
 using namespace std;
 
@@ -9,6 +10,7 @@ typedef struct node {
 
 typedef struct scatter_node {
   node *head = NULL;
+  int a = 0;
 } scatter_node;
 
 bool item_exist(scatter_node *scatter_table, unsigned index, string value){
@@ -28,7 +30,7 @@ bool insert_item(scatter_node *scatter_table, unsigned index, string value){
    if(item_exist(scatter_table, index, value)) {
       return true;
    } else {
-      node *new_node = (node *) malloc(sizeof(node));
+      node *new_node = (node *) malloc(10 * sizeof(node));
 
       if(new_node == NULL){
          return false;
