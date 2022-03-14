@@ -27,20 +27,16 @@ bool item_exist(scatter_node *scatter_table, unsigned index, string value){
 
 // insert at first postion to not need to iterate over the whole list
 bool insert_item(scatter_node *scatter_table, unsigned index, string value){
-   if(item_exist(scatter_table, index, value)) {
-      return true;
-   } else {
-      node *new_node = (node *) malloc(10 * sizeof(node));
+   node *new_node = (node *) malloc(10 * sizeof(node));
 
-      if(new_node == NULL){
-         return false;
-      } 
+   if(new_node == NULL){
+      return false;
+   } 
 
-      new_node->value = value;
-      new_node->next = scatter_table[index].head;
-      scatter_table[index].head = new_node;
-      return true;
-   }
+   new_node->value = value;
+   new_node->next = scatter_table[index].head;
+   scatter_table[index].head = new_node;
+   return true;
 }
 
 void print(node *chain_list){
