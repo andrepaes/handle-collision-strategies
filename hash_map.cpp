@@ -2,9 +2,9 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
-//#include "linked_list.h"
+#include "linked_list.h"
 //#include "bst.h"
-#include "avl.h"
+//#include "avl.h"
 #include <unistd.h>
 #include <cstdlib>
 
@@ -54,7 +54,6 @@ int main()
 
     cout << duration.count() << endl;
 
-    print(scatter_table[0].root);
-    cout << height(scatter_table[0].root) << " " << scatter_table[0].numberNode << endl;
+    print(scatter_table[0].head);
     return 0;
 }

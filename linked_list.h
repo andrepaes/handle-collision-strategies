@@ -3,18 +3,21 @@
 
 using namespace std;
 
-typedef struct node {
-  string value;
-  node *next = NULL;
-} node;
+class Node {
+   public:
+      Node():next(nullptr){}
+      string value;
+      Node *next;
+};
 
-typedef struct scatter_node {
-  node *head = NULL;
-  int a = 0;
-} scatter_node;
+class scatter_node {
+   public:
+       scatter_node():head(nullptr){}
+       Node *head;
+};
 
-bool item_exist(scatter_node *scatter_table, unsigned index, string value){
-   node *finder = scatter_table[index].head;
+bool item_exist(scatter_node *scatter_table, unsigned index, string& value){
+   Node *finder = scatter_table[index].head;
    while(finder != NULL) {
       if(value.compare(finder->value) == 0){
          return true;
@@ -26,10 +29,10 @@ bool item_exist(scatter_node *scatter_table, unsigned index, string value){
 }
 
 // insert at first postion to not need to iterate over the whole list
-bool insert_item(scatter_node *scatter_table, unsigned index, string value){
-   node *new_node = (node *) malloc(10 * sizeof(node));
+bool insert_item(scatter_node *scatter_table, unsigned index, string& value){
+   Node *new_node = new Node;
 
-   if(new_node == NULL){
+   if(new_node == nullptr){
       return false;
    } 
 
@@ -39,8 +42,8 @@ bool insert_item(scatter_node *scatter_table, unsigned index, string value){
    return true;
 }
 
-void print(node *chain_list){
-   node *reader = chain_list;
+void print(Node *chain_list){
+   Node *reader = chain_list;
    while(reader !=  NULL){
       cout << "VALUE: " << reader->value << "\n";
       reader = reader->next;
