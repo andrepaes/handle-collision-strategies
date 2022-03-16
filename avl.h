@@ -3,17 +3,16 @@
 using namespace std;
 
 class Node {
-public:
+  public:
     Node():left(nullptr), right(nullptr), height(0){}
     string value;
     Node *left;
     Node *right;
     unsigned height;
-
 };
 
 class scatter_node {
-public:
+  public:
     scatter_node():root(nullptr),numberNode(0){}
     Node *root;
     unsigned numberNode;

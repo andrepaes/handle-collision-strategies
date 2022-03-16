@@ -8,14 +8,25 @@ typedef struct node {
   node *right = NULL;
 } node;
 
-typedef struct scatter_node {
-  node *root = NULL;
-} scatter_node;
+class Node {
+  public:
+    Node():left(nullptr), right(nullptr){}
+    string value;
+    Node *left;
+    Node *right;
+};
+
+class scatter_node {
+  public:
+    scatter_node():root(nullptr),numberNode(0){}
+    Node *root;
+    unsigned numberNode;
+};
 
 // auxiliary functions
 
 // use preorder path
-void print(node *actual_node) {
+void print(Node *actual_node) {
   if(actual_node == NULL){
     return;
   }
@@ -24,7 +35,8 @@ void print(node *actual_node) {
   print(actual_node->left);
   print(actual_node->right);
 }
-bool do_insert_item(node* actual_node, node* new_node) {
+
+bool do_insert_item(Node* actual_node, Node* new_node) {
   if(new_node->value.compare(actual_node->value) < 0){
     if(actual_node->left == NULL){
       actual_node->left = new_node;
@@ -43,7 +55,7 @@ bool do_insert_item(node* actual_node, node* new_node) {
   }
 }
 
-bool do_item_exist(node *actual_node, string value){
+bool do_item_exist(Node *actual_node, string& value){
   if(actual_node == NULL) {
     return false;
   }
@@ -61,7 +73,7 @@ bool do_item_exist(node *actual_node, string value){
 
 // exported functions
 bool item_exist(scatter_node *scatter_table, unsigned index, string value){
-  node *root = scatter_table[index].root;
+  Node *root = scatter_table[index].root;
   if(root == NULL){
     return false;
   }
@@ -69,8 +81,8 @@ bool item_exist(scatter_node *scatter_table, unsigned index, string value){
   return do_item_exist(root, value);
 }
 
-bool insert_item(scatter_node *scatter_table, unsigned index, string value) {
-  node *new_node = (node *) malloc(10 * sizeof(node));
+bool insert_item(scatter_node *scatter_table, unsigned index, string&  value) {
+  Node *new_node = (Node *) malloc(10 * sizeof(Node));
   new_node->value = value;
 
   if(new_node == NULL){

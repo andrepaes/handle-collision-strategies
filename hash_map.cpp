@@ -26,10 +26,9 @@ unsigned hash_key(string& key, unsigned len) {
 int main()
 {
     string row, word, value;
-    vector<string> row_array;
-    //scatter_node *scatter_table = (scatter_node *) malloc(sizeof(scatter_node) * TABLE_SIZE);
+    vector<string> proof_values;
+    unsigned counter = 0;
     scatter_node *scatter_table = new scatter_node[TABLE_SIZE];
-    //vector<Node *> scatter_table(TABLE_SIZE, nullptr);
 
     auto start = high_resolution_clock::now();
 
@@ -54,6 +53,5 @@ int main()
 
     cout << duration.count() << endl;
 
-    print(scatter_table[0].head);
     return 0;
 }
