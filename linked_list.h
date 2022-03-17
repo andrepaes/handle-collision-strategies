@@ -49,3 +49,12 @@ void print(Node *chain_list){
       reader = reader->next;
    }
 }
+
+void free_all(Node *chain_list) {
+   Node *first_ptr = chain_list, *second_ptr = chain_list;
+   while(first_ptr !=  NULL){
+      second_ptr = first_ptr->next;
+      free(first_ptr);
+      first_ptr = second_ptr;
+   }
+}

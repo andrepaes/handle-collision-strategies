@@ -14,7 +14,7 @@
 
 using namespace std::chrono;
 
-unsigned TABLE_SIZE = 10;
+unsigned TABLE_SIZE = 1000;
 unsigned M = 31;
 unsigned FILE_SIZE = 4000000;
 //unsigned FILE_SIZE = 1000;
@@ -66,7 +66,7 @@ int main()
 
     auto duration = duration_cast<microseconds>(stop - start);
 
-    cout << "\n\n" << "INSERTION TIME: " << duration.count() << "microseconds \n\n";
+    cout << "\n\n" << "INSERTION TIME: " << duration.count() << " microseconds \n\n";
 
     auto start_query = high_resolution_clock::now();
 
@@ -83,6 +83,11 @@ int main()
 
     auto duration_query = duration_cast<microseconds>(stop_query - start_query);
 
-    cout << "\n\nREAD TIME: " << duration_query.count() << "microseconds " << endl;
+    cout << "\n\nREAD TIME: " << duration_query.count() << " microseconds " << endl;
+
+    for(int i = 0; i < TABLE_SIZE; i++) {
+        free_all(scatter_table[i].head);
+        scatter_table[i].head = nullptr;
+    }
     return 0;
 }
