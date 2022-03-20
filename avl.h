@@ -170,3 +170,14 @@ bool insert_item(scatter_node *scatter_table, unsigned index, string& value) {
     scatter_table[index].numberNode++;
     return true;
 }
+
+void free_all(Node *actual_node) {
+
+    if(actual_node == nullptr){
+        return;
+    }
+
+    free_all(actual_node->left);
+    free_all(actual_node->right);
+    free(actual_node);
+}
